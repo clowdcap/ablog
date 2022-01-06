@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Blog - Category {{ cats }}{% endblock %}
+
+{% block content %}
+
+    {% if category_posts %}
+        <h1>Category</h1>
+        <br><br>
+
+    <ul>
+        {% for post in category_posts %}
+            
+            <li>
+                <a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a>
+                - By: {{ post.author }} - At: {{ autor.post_date }}
+                
+                <small>
+                    {% if user.is_authenticated %}
+                    <a class="btn btn-secondary" href="{% url 'update_post' post.pk %}">Edit</a>
+                    <a class="btn btn-secondary" href="{% url 'delete_post' post.pk %}">Delete</a>
+                    {% endif %}
+                </small>
+                <hr>
+            </li>
+
+        {% endfor %}
+
+    </ul>
+    {% else %}
+        <h1>Category</h1>
+        <br><br>
+        <ul> 
+            {% if user.is_authenticated %}
+            <h3>Dont have post this category, create a new post here </h3>
+            <a class="btn btn-primary" href="{% url 'add_post' %}">Add Post</a>
+            {% else %}
+            <h3>Dont have post this category,  wait a new post</h3>
+            <a class="btn btn-primary" href="{% url 'home' %}">Home</a>
+            {% endif %}
+        </ul>
+    {% endif %}
+{% endblock %}
+

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Blog - Home Page{% endblock %}
+{% block content %}
+<h1>Post</h1>
+<br><br>
+{% for post in object_list %}
+    <ul>
+        <h3>{{ post.title }} </h3>
+        <small>{{ post.author }}</small>
+        <p>{{ post.title_tag }}</p>
+        <a href="{% url 'category' post.category|slugify  %}"><span>{{ post.category }}</span></a>
+        <p>{{ post.snippet }}</p>
+        <!--p>{{ post.body|slice:':50'|safe }} ...</p-->
+        <a class="btn btn-primary" href="{% url 'article-detail' post.pk %}">Read more</a>
+        {% if user.is_authenticated %}
+            {% if user.id == post.author.id %}
+                <a class="btn btn-secondary" href="{% url 'update_post' post.pk %}">Edit</a>
+                <a class="btn btn-secondary" href="{% url 'delete_post' post.pk %}">Delete</a>
+            {% endif %}
+        {% endif %}
+    </ul>
+    {% empty %}
+        <ul>    
+            <h3>Dont have post, create a post here </h3>
+            <a class="btn btn-primary" href="{% url 'add_post' %}">Add Post</a>
+        </ul>
+{% endfor %}
+{% endblock %}

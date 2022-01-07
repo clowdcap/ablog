@@ -10,7 +10,7 @@ from .forms import EditProfileForm, SignUpForm, PasswordChangingForm
 # Create your views here.
 
 class ShowProfilePageView(DetailView):
-    models = Profile
+    model = Profile
     template_name = 'registration/user_profile.html'
 
     def get_context_data(self, *args, **kwargs):

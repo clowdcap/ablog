@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Blog - Edit Profile Page{% endblock %}
+{% block content %}
+
+    {% if user.is_authenticated %}
+        <h1>Edit Profile - {{user.first_name }}</h1>
+        {% if user.id == profile.user.id %}
+            <hr>
+            <div class="form-group">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <br>
+                    <hr>
+                    <button class="btn btn-secondary">Update Profile Page</button>
+                </form>
+            </div>
+
+        {% else %} 
+            <br><br>
+            <h3>You are not correct User to edit this profile!</h3>
+            <p>Go back to home page</p>
+            <a href="{% url 'home' %}">Click here to return</a>
+        {% endif %}
+    {% else %} 
+        
+    <h3>You are not correct User to edit this profile!</h3>
+    <p>Go back to home page</p>
+    <a href="{% url 'home' %}">Click here to return</a>
+        
+<hr>
+    {% endif %}
+
+{% endblock %}
+
+

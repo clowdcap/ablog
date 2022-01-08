@@ -1,17 +1,16 @@
 {% extends 'base.html' %}
-{% block title %}Blog - Edit Profile{% endblock %}
+{% block title %}Blog - {{user.first_name}} Edit Settings{% endblock %}
 
 {% block content %}
-<h1>Edit Profile</h1>
-
-{{ user.profile.bio }}
-<br><br>
+<h1>Edit Settings - {{user.first_name}}</h1>
+<hr>
+<!--{{ user.profile.bio }}-->
 <div class="form-group">
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        
-        <button class="btn btn-secondary">Update Profile</button>
+        <hr>
+        <button class="btn btn-secondary">Update Settings</button>
     </form>
 </div>
 {% endblock %}

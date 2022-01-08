@@ -1,20 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Blog - User Profile{% endblock %}
+{% block title %}Blog - {{ page_user }} - User Profile{% endblock %}
 {% block content %}
-<h1>User Profile</h1>
-<br><br>
-
-{{ page_user }}
-
-<br><br>
-
+<h1>User Profile - {{page_user.user.first_name}} {{page_user.user.last_name}}</h1>
+<hr>
+<br>
 <div class="card mb-3" >
     <div class="row g-0">
         <div class="col-md-2">
         <!--img src="..." class="img-fluid rounded-start" alt="..."-->
         {% if page_user.profile_pic  %}
-            <img src="{{ post.author.profile.profile_pic.url }}" class="rounded-circle" alt="" width="180px" height="180px" >
+            <img src="{{ page_user.profile_pic.url }}" class="rounded-circle" alt="" width="180px" height="180px" >
         {% else %}
             <img src="{% static 'theblog/images/default-profile-picture.png' %}" class="rounded-circle" alt="" width="180px" height="180px" >
         {% endif %}
@@ -22,8 +18,6 @@
         <div class="col-md-10">
             <div class="card-body">
                 <h5 class="card-title">{{ page_user.user.first_name }} {{ page_user.user.last_name }}</h5>
-                <p class="small text-muted">Contact: 
-                <a href="{% url 'show_profile_page' post.author.profile.id %}"> Visite to Profile</a> -
 
                 {% if page_user.website_url %}
                     <a target="_blank" href="{{ page_user.website_url }}">Website </a> |
@@ -53,5 +47,4 @@
 </div>
 
 
-{% endfor %}
 {% endblock %}

@@ -3,7 +3,7 @@
 {% block content %}
 
     {% if user.is_authenticated %}
-        <h1>Edit Profile - {{user.first_name }}</h1>
+        <h1>Editar Perfil - {{user.first_name }}</h1>
         {% if user.id == profile.user.id %}
             <hr>
             <div class="form-group">
@@ -12,21 +12,21 @@
                     {{ form.as_p }}
                     <br>
                     <hr>
-                    <button class="btn btn-secondary">Update Profile Page</button>
+                    <button class="btn btn-secondary">Editar Perfil</button>
                 </form>
             </div>
 
         {% else %} 
             <br><br>
-            <h3>You are not correct User to edit this profile!</h3>
-            <p>Go back to home page</p>
-            <a href="{% url 'home' %}">Click here to return</a>
+            <h3>Você não está logado com a conta certa para editar este perfil!</h3>
+            <p>Volte para o Home</p>
+            <a href="{% url 'home' %}">Clique aqui para retornar</a>
         {% endif %}
     {% else %} 
         
-    <h3>You are not correct User to edit this profile!</h3>
-    <p>Go back to home page</p>
-    <a href="{% url 'home' %}">Click here to return</a>
+    <h3>Você não está logado com a conta certa para editar este perfil!</h3>
+    <p>Volte para o Home</p>
+    <a href="{% url 'home' %}">Clique aqui para retornar</a>
         
 <hr>
     {% endif %}

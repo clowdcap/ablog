@@ -1,0 +1,109 @@
+{% load static %}
+
+<footer id="footer">
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col-3">
+                <h2 class="footer-title secondary-title">Sobre JM</h2>
+
+                <div class="secondary-title text-secondary">
+                        <p class="mt-2 ">
+                            Blog desenvolvido incialmente para ter um espaço de anotações, soluções e de resoluções de pesquisas,
+                            resumo de artigos e de outros tipos de leitura, para que haja um preparatório para o TCC e ter um
+                            pequeno teste de como podemos fazer para divulgação de conteudo.
+                        </p>
+                        
+                        <address>
+                            <i class="fas fa-map-marker-alt text-primary"></i> 
+                            Curitiba - PR | Brasil
+                        </address>
+
+                        <div class="phone">
+                            <i class="fas fa-mobile text-primary"></i> 
+                            +55 (41) 9 9272-5388
+                        </div>
+
+                        <div class="email">
+                            <i class="fas fa-envelope text-primary"></i> 
+                            jose.marinho56@gmail.com
+                        </div>
+
+                </div>
+            </div>
+            <div class="col-3">
+                <h2 class="footer-title secondary-title">Novos Posts</h2>
+
+                <div class="feature-post">
+                    
+                    {% for post in post_footer %}
+                    
+                    <div class="flex-item">
+                        <article class="article">
+                            <div class="d-flex">
+                                <a href="{% url 'article-detail' post.pk %}">
+                                    {% if post.header_image %}
+                                    <img src="{{ post.header_image.url }}" style="width: 100px;" class="object-fit px-1" alt="header_image">
+                                    {% else %}
+                                    <img src="{% static 'images/imagem-default.png' %}" style="width: 100px;" class="img-fluid" alt="header_article"> <!-- colocar depois a img do post -->
+                                    {% endif %}  
+                                    <div class="px-1">
+                                        <a href="{% url 'article-detail' post.pk %}" class="text-title display-2 text-dark">
+                                            {{ post.title }}
+                                        </a>
+                                        <p class="secondary-title text-secondary display-3">
+                                            <span><i class="far fa-clock text-primary"></i> {{ post.post_date }} </span>
+                                            <br>
+                                            <span><a class="nav-link" style="font-size: 14px !important; margin: 0 !important;" href="{% url 'show_profile_page'  post.author.profile.id %}"><i class="fas fa-portrait"></i> {{ post.author.first_name }} {{ post.author.last_name }}</a>   </span>
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    {% empty %}
+                    <ul>    
+                        <h3>Dont have post, create a post here </h3>
+                    </ul>
+                    {% endfor %}
+
+
+
+
+                </div>
+            </div>
+            
+            <div class="col-3">
+                    <h2 class="footer-title secondary-title">Categorias</h2>
+
+                    <div class="tags">
+                        <div class="d-flex flex-wrap">
+
+                            {% for item in cat_menu %}
+                                <a href="{% url 'category' item|slugify  %}" class="nav-link btn bg-light">{{ item }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <h2 class="footer-title secondary-title mt-2">Social</h2>
+
+                <div class="tags social">
+                    <div class="d-flex flex-wrap">
+                        <a href="#" class="nav-link btn bg-light"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="nav-link btn bg-light"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="nav-link btn bg-light"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="nav-link btn bg-light"><i class="fab fa-dribbble"></i></a>
+                    </div>
+                </div>
+
+            </div>  
+        </div>
+
+        <!-- copyrights  -->
+        <div class="copyrights">
+            <p class="text-center text-secondary display-2">
+                    © 2021 <a href="#" class="text-primary">Dailytuition</a> - Personal Blog Theme. All rights reserved.
+            </p>
+        </div>
+    </div>
+</footer>

@@ -2,7 +2,7 @@
 {% block title %}Blog - Delete Post{% endblock %}
 
 {% block content %}
-<h1>Delete Post</h1>
+<h1>Deletar Post</h1>
 <br><br>
 {% if user.is_authenticated %}
     {% if user.id == post.author.id %}
@@ -11,21 +11,20 @@
         <div class="form-group">
             <form method="post">
                 {% csrf_token %}
-                <strong>Are you sure ?</strong>
+                <strong>Você tem certeza que quer deletar esse Post ?</strong>
+                <small>Se você deletar, não terá mais como recuperar o mesmo.</small>
                 <br>
                 <button class="btn btn-secondary">Delete</button>
             </form>
         </div>
     {% else %} 
-        <h3>You don't have permission for delete this post !</h3>
-        <p>Combe back for initial page </p>
-        <a href="{% url 'home' %}">Click here !</a>
+        <h3>Você não tem permissão para deletar esse post</h3>
+        <p>Volte para pagina incial</p>
+        <a href="{% url 'home' %}">Clique aqui para voltar</a>
     {% endif %}
 {% else %} 
-    <h1>Delete Post</h1>
-    <br><br>
-    <h3>You dont have permission for delete this post !</h3>
-    <p>Combe back for initial page </p>
-    <a href="{% url 'home' %}">Click here !</a>
+    <h3>Você não tem permissão para deletar esse post</h3>
+    <p>Volte para pagina incial</p>
+    <a href="{% url 'home' %}">Clique aqui para voltar</a>
 {% endif %}
 {% endblock %}

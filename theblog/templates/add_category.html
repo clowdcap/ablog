@@ -2,21 +2,18 @@
 {% block title %}Blog - Add Category{% endblock %}
 
 {% block content %}
-
-{% if user.is_authenticated %}
-    <h1>Add Category</h1>
+<h1>Adicionar Categoria</h1>
     <br><br>
+{% if user.is_staff %}
     <div class="form-group">
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <button class="btn btn-secondary">Create</button>
+            <button class="btn btn-secondary">Criar</button>
         </form>
     </div>
 {% else %} 
-    <h1>Add Post</h1>
-    <br><br>
-    <h3>Você não tem permissão para editar o post !</h3>
+    <h3>Você não tem permissão para criar uma categoria !</h3>
     <p>Volte para pagina incial</p>
     <a href="{% url 'home' %}">Clique aqui para voltar</a>
 {% endif %}

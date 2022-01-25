@@ -32,8 +32,10 @@ class HomeView(ListView):
 
     def get_context_data(self, *args, **kwargs):
         cat_menu = Category.objects.all()
+        post_footer = Post.objects.all()[0:3]
         context = super(HomeView, self).get_context_data(*args, **kwargs)
         context['cat_menu'] = cat_menu  
+        context['post_footer'] = post_footer
         return context
 
 def CategoryView(request, cats):

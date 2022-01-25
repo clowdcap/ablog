@@ -64,9 +64,9 @@
             {% csrf_token %}
             {% if user.is_authenticated %}
                 {% if liked %}
-                    <button type="submit", name='post_id' value="{{ post.id }}" class="btn btn-danger btn-sm"><i class="fas fa-heart-broken"></i> Deslike</button> - Total: {{ total_likes }} likes
+                    <button type="submit", name='post_id' value="{{ post.id }}" class="btn btn-danger btn-sm" style="background-color: var(--secondary ); cursor: pointer; border-radius: 8px ;color: white; font-size: 16px;"><i class="fas fa-heart-broken"></i> Deslike</button> - Total: {{ total_likes }} likes
                 {% else %}
-                    <button type="submit", name='post_id' value="{{ post.id }}" class="btn btn-primary btn-sm"><i class="fas fa-heart"></i> Like</button> - Total: {{ total_likes }} likes
+                    <button type="submit", name='post_id' value="{{ post.id }}" class="btn btn-primary btn-sm" style="background-color: var(--primary-color); cursor: pointer; border-radius: 8px ; color: white; font-size: 16px;"><i class="fas fa-heart"></i> Like</button> - Total: {{ total_likes }} likes
             
                 {% endif %}
             {% else %}

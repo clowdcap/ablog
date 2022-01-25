@@ -57,7 +57,7 @@
                             {% endif %}
                             <p class="secondary-title text-secondary display-3">
                                 <span><i class="fas fa-portrait" style="color:var(--primary-color);"></i> {{ post.author.first_name }}</span>
-                                <p>{{ post.body|slice:':25'|safe }} ...</p>
+                                <p class="mt-2 text-secondary">{{ post.snippet|safe }}... <br><br><a class="mt-2 text-secondary" style="color: var(--primary-color); border: 1px solid #c5c5c5; padding: 0.5rem 2rem; border-radius: 8px;" href="{% url 'article-detail' post.pk %}"">Leia mais</a></p>
                             </p>
                         </div>
                     </div>

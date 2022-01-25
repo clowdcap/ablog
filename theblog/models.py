@@ -45,7 +45,8 @@ class Post(models.Model):
     likes = models.ManyToManyField(User, related_name='blog_posts')
 
     class Meta:
-        ordering = ['-author']
+        #ordering = ['-author']
+        ordering = ['-post_date']
 
     def total_likes(self):
         return self.likes.count()

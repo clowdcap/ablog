@@ -99,8 +99,6 @@ class DeletePostView(DeleteView):
     success_url = reverse_lazy('home')
     
 
-
-
 def ContactView(request):
     success_url = reverse_lazy('contact.html')
     if request.method == 'POST':
@@ -111,7 +109,6 @@ def ContactView(request):
         
     form = ContactForm()
     context = {'form': form}
-    
     
     return render(request, 'contact.html', context)
 

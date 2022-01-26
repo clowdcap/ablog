@@ -7,19 +7,37 @@
     {% if category_posts %}
       
 
-    <ul>
+    <ul style="list-style-type: none;">
         {% for post in category_posts %}
-            
-            <li>
-                <a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a> <span style="color: transparent;">_____</span>|<span style="color: transparent;">_____</span> Por: {{ post.author }} - Às: {{ post.post_date }}
-                
-                <small>
+            <li class="nav-link-static">
+                <p>
+                    Nome do Post 
+                    <span style="color: transparent;">__________________</span>
+                    Identificação    
                     {% if user.is_authenticated %}
-                        <a class="btn btn-secondary" href="{% url 'update_post' post.pk %}">Edit</a>
-                        <a class="btn btn-secondary" href="{% url 'delete_post' post.pk %}">Delete</a>
+                        {% if user.id == post.author.id %}
+                    <span style="color: transparent;">__________________</span>
+                    Configuração
+                        {% endif %}
                     {% endif %}
+                </p>
+                <hr style="opacity: 0.5; width: 80%; margin: 0 auto;">
+                <br>
+            </li>
+            <li style="text-align: center;">
+                <a class="nav-link" href="{% url 'article-detail' post.pk %}">{{ post.title }}</a> <span style="color: transparent;">_______________</span> Por: <a class="nav-link" href="{% url 'show_profile_page'  post.author.profile.id %}"> {{ post.author.first_name }}</a> - Às: {{ post.post_date }}
+                
+                <small >
+                    {% if user.is_authenticated %}
+                        {% if user.id == post.author.id %}
+                        <span style="color: transparent;">__________________</span>
+                            <a class="nav-link" href="{% url 'update_post' post.pk %}">Editar</a>
+                            <a class="nav-link" href="{% url 'delete_post' post.pk %}">Deletar</a>
+                        {% endif %}
+                    {% endif %}
+
                 </small>
-                <hr>
+                <hr style="margin: 1rem 0; color: var(--dark);opacity: 0.7;">
             </li>
 
         {% endfor %}
@@ -29,10 +47,10 @@
 
         <ul> 
             {% if user.is_authenticated %}
-            <h3>Dont have post this category, create a new post here </h3>
-            <a class="btn btn-primary" href="{% url 'add_post' %}">Add Post</a>
+            <h3>Você não tem post criado nessa categoria, crie um post</h3>
+            <a class="btn btn-primary" href="{% url 'add_post' %}">Adicionar Post</a>
             {% else %}
-            <h3>Dont have post this category,  wait a new post</h3>
+            <h3>Você ainda não tem categoria criada</h3>
             <a class="btn btn-primary" href="{% url 'home' %}">Home</a>
             {% endif %}
         </ul>

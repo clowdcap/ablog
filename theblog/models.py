@@ -71,3 +71,15 @@ class Comment(models.Model):
 
     def __str__(self):
         return '%s - %s' % (self.post.title, self.name)
+    
+
+class Contact(models.Model):
+    name =  models.CharField(max_length=255)
+    email = models.EmailField(max_length=255)
+    phone = models.CharField(max_length=255)
+    body = RichTextField(blank=True, null=True)
+    date_add = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return '%s - %s' % (self.name, self.email)
+    

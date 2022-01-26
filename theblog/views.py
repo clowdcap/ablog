@@ -1,10 +1,11 @@
+from re import template
 from django.db.models import fields
 from django.shortcuts import render, resolve_url, get_object_or_404
 from django.urls.base import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
-from .models import Category, Post
-from .forms import EditPost, PostForm
+from .models import Category, Post, Contact
+from .forms import EditPost, PostForm, ContactForm
 
 
 # Create your views here.
@@ -31,9 +32,10 @@ class HomeView(ListView):
     ordering = ['-id']
 
     def get_context_data(self, *args, **kwargs):
+        context = super(HomeView, self).get_context_data(*args, **kwargs)
         cat_menu = Category.objects.all()
         post_footer = Post.objects.all()[0:3]
-        context = super(HomeView, self).get_context_data(*args, **kwargs)
+        
         context['cat_menu'] = cat_menu  
         context['post_footer'] = post_footer
         return context
@@ -54,17 +56,17 @@ class ArticleDetailView(DetailView):
     template_name = 'article_details.html'
 
     def get_context_data(self, *args, **kwargs):
-        cat_menu = Category.objects.all()
         context = super(ArticleDetailView, self).get_context_data(*args, **kwargs)
-        
-        
+        cat_menu = Category.objects.all()
+        post_footer = Post.objects.all()[0:3]
         stuff = get_object_or_404(Post, id=self.kwargs['pk'])
         total_likes = stuff.total_likes()
         
         liked = False
         if stuff.likes.filter(id=self.request.user.id).exists():
             liked = True    
-        
+            
+        context['post_footer'] = post_footer
         context['cat_menu'] = cat_menu  
         context['total_likes'] = total_likes
         context['liked'] = liked
@@ -95,3 +97,34 @@ class DeletePostView(DeleteView):
     model = Post
     template_name = 'delete_post.html'
     success_url = reverse_lazy('home')
+    
+
+
+
+def ContactView(request):
+    success_url = reverse_lazy('contact.html')
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'contact-sucess.html')
+        
+    form = ContactForm()
+    context = {'form': form}
+    
+    
+    return render(request, 'contact.html', context)
+
+
+'''class ContactView(ListView):
+    model = Contact
+    form_class = ContactForm
+    template_name = 'contact.html'
+    
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super(ContactView, self).get_context_data(*args, **kwargs)
+        post_footer = Post.objects.all()[0:3]
+        context = {'form': self.form_class}
+        context['post_footer'] = post_footer
+        return context'''

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Blog - Contact{% endblock %}
+{% block content %}
+
+<h1>Contato</h1>
+<br><br>
+<div style="text-align: center;">
+    
+<h2>Mensagem enviada com sucesso</h2>
+<p>Voltar para Contatos ou para o Home</p>
+<p><a class="nav-link" href="{% url 'contact_page' %}">Contatos</a><span style="color: transparent;">_____</span>|<span style="color: transparent;">_____</span> <a class="nav-link"  href="{% url 'home' %}">Home</a></p>
+
+</div>
+{% endblock %}
+

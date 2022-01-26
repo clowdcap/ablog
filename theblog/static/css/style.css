@@ -206,6 +206,14 @@ a{
     font-family: 'Poppins', sans-serif;
 }
 
+.nav-link-static{
+    text-align: center;
+    font-size: 18px;
+    margin: 12px;
+    color: var(--dark);
+    font-family: 'Poppins', sans-serif;
+}
+
 .nav-link:hover{
     color: var(--primary-color);
 }
@@ -462,39 +470,78 @@ a{
 
 
 
+.contact-data {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: 'ladoa ladob'
+                        'ladoc ladod';
+}
+
+    .lado-a {
+        grid-area: ladoa;
+        text-align: end;
+        padding: 0 .5rem;
+    }
+
+    .lado-b {
+        grid-area: ladob;
+        text-align: start;
+        padding: 0 .5rem;
+    }
+    .lado-c {
+        grid-area: ladoc;
+        text-align: center;
+        padding: 0 .5rem;
+        background-color: #adb5bd;
+        padding: 35px 0;
+        border-radius: 15px;
+    }
+
+    .lado-d {
+        grid-area: ladod;
+        text-align: center;
+        padding: 0 .5rem;
+        background-color: #f1f1f1;
+        border-radius: 15px;
+        padding: 35px 0;
+        vertical-align: middle;
+    }
+
+
 .dropbtn {
     border: none;
     cursor: pointer;
     background-color: transparent;
-  }
-  
-  .dropdown {
+}
+
+.dropdown {
     position: relative;
     display: inline-block;
-  }
-  
-  .dropdown-content {
+}
+
+.dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-  }
-  
-  .dropdown-content a {
+}
+
+.dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-  }
-  
-  .dropdown-content a:hover {background-color: #f1f1f1}
-  
-  .dropdown:hover .dropdown-content {
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
     display: block;
-  }
-  
-  .dropdown:hover .dropbtn {
+}
+
+.dropdown:hover .dropbtn {
     color: var(--primary-color);
-  }
+}
+

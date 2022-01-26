@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Blog - Contact{% endblock %}
+{% block content %}
+
+<h1 style="padding-top: 5rem;">Contato</h1>
+<p>Conheça JM Arquitetura</p>
+
+
+<div style="text-align: center;">
+<p style="padding: 5rem 0;">Aqui vai ficar um banner</p>
+</div>
+
+<div class="contact-data">
+    <div class="lado-a">
+        <p>Responsável</p>    
+    </div>
+
+    <div class="lado-b">
+       <p>José Arialdo Marinho Junior</p>
+       <p>CAU: XXXXX/XX - Arquiteto e Urbanista</p>
+       <p>Tel: +55 41 9 9272-5388 - WhatsApp</p>
+       <p>Email: jose.marinho56@gmail.com</p>
+       <p>Discord: MPollo #5037</p>
+       <p>Github: </p>
+       <p>Endereço: Curitiba / PR - Brasil</p>    
+    </div>
+
+   
+
+    <div class="lado-c">
+       <h4> <i>" Saimos do zero para o zero"</i> </h4>
+       <p>(2022, Jose)</p>
+    </div>
+
+    <div class="lado-d">
+        <h3>JM Arquitetura</h3>
+        <p>Arquitetura, Urbanismo e Tecnologia</p>
+    </div>
+</div>
+
+
+<h2>Entre em Contato</h2>
+<br><br>
+
+<div class="form-group">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+
+{% endblock %}

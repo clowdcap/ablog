@@ -3,7 +3,7 @@ from django.db.models import fields
 from django.shortcuts import render, resolve_url, get_object_or_404
 from django.urls.base import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, request
 from .models import Category, Post, Contact
 from .forms import EditPost, PostForm, ContactForm
 
@@ -99,29 +99,14 @@ class DeletePostView(DeleteView):
     success_url = reverse_lazy('home')
     
 
-def ContactView(request):
-    success_url = reverse_lazy('contact.html')
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return render(request, 'contact-sucess.html')
-        
-    form = ContactForm()
-    context = {'form': form}
-    
-    return render(request, 'contact.html', context)
-
-
-'''class ContactView(ListView):
+class ContactView(ListView):
     model = Contact
     form_class = ContactForm
     template_name = 'contact.html'
-    
-    
+ 
     def get_context_data(self, *args, **kwargs):
         context = super(ContactView, self).get_context_data(*args, **kwargs)
         post_footer = Post.objects.all()[0:3]
-        context = {'form': self.form_class}
+        context['form'] = self.form_class
         context['post_footer'] = post_footer
-        return context'''
+        return context

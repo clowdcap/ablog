@@ -28,18 +28,20 @@ class PostForm(forms.ModelForm):
 class EditPost(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'title_tag', 'category', 'body')
+        fields = ('title', 'title_tag', 'category', 'body','snippet')
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'title_tag': forms.TextInput(attrs={'class': 'form-control'}),
             'category': forms.Select(choices=choice_list, attrs={'class': 'form-control'}),
-            'body': forms.Textarea(attrs={'class': 'form-control'}), 
+            'body': forms.Textarea(attrs={'class': 'form-control'}),
+            'snippet': forms.Textarea(attrs={'class': 'form-control'}),
         }
         
         
 class ContactForm(forms.ModelForm):
     class Meta:
+        
         model = Contact
         fields = '__all__'
 

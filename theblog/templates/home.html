@@ -65,26 +65,22 @@
             </div>
 
         {% empty %}
-        <ul style="margin-bottom: 50px; text-align: center;">    
-            <h3 style="font-size: 30px;">Não tem post registrado no banco de dados, crie um post aqui</h3>
-            <a class="nav-link" style="font-size: 25px; " href="{% url 'add_post' %}">Criar Post</a>
-            <br><br><br>
-        </ul>
+            <ul style="margin-bottom: 50px; text-align: center;">    
+                <h3 style="font-size: 30px;">Não tem post registrado no banco de dados, crie um post aqui</h3>
+                <a class="nav-link" style="font-size: 25px; " href="{% url 'add_post' %}">Criar Post</a>
+                <br><br><br>
+            </ul>
         {% endfor %}
             <!-- .article -->
             
         </div>
 
-
-        
-        
         <!--div class="text-center">
             <button class="btn btn-primary secondary-title text-light">Load More Posts...</button>
         </div-->
     </div>
 </section>
 
-<br><br><br>
 <!-- .Blog Post Section -->
 
 <!-- Swiper slider -->

@@ -468,26 +468,52 @@ a{
 
 
 
+.banner-contact {
+    width: 100%;
+    padding-bottom: 2rem;
+    text-align: center;
+}
+    .banner-contact img {
+        width: 100%;
+    }
 
 
 .contact-data {
     display: grid;
     grid-template-columns: 50% 50%;
     grid-template-areas: 'ladoa ladob'
+                        'sep sep'
                         'ladoc ladod';
+
 }
 
     .lado-a {
         grid-area: ladoa;
         text-align: end;
         padding: 0 .5rem;
+        width: 100%;
     }
+
+        .lado-a img {
+            width: 100%;
+        }
 
     .lado-b {
         grid-area: ladob;
         text-align: start;
         padding: 0 .5rem;
+        display: grid;
     }
+
+        .lado-b ul {
+            align-items: center;
+            list-style-type: none;
+        }
+
+        .lado-b p {
+            font-size: 20px;
+        }
+
     .lado-c {
         grid-area: ladoc;
         text-align: center;
@@ -507,6 +533,10 @@ a{
         vertical-align: middle;
     }
 
+    .sep {
+        grid-area: sep;
+        padding: 0.5rem 0;
+    }
 
 .dropbtn {
     border: none;

@@ -9,34 +9,26 @@
 
     <ul style="list-style-type: none;">
         {% for post in category_posts %}
-            <li class="nav-link-static">
-                <p>
-                    Nome do Post 
-                    <span style="color: transparent;">__________________</span>
-                    Identificação    
-                    {% if user.is_authenticated %}
-                        {% if user.id == post.author.id %}
-                    <span style="color: transparent;">__________________</span>
-                    Configuração
-                        {% endif %}
-                    {% endif %}
-                </p>
-                <hr style="opacity: 0.5; width: 80%; margin: 0 auto;">
-                <br>
-            </li>
-            <li style="text-align: center;">
-                <a class="nav-link" href="{% url 'article-detail' post.pk %}">{{ post.title }}</a> <span style="color: transparent;">_______________</span> Por: <a class="nav-link" href="{% url 'show_profile_page'  post.author.profile.id %}"> {{ post.author.first_name }}</a> - Às: {{ post.post_date }}
-                
-                <small >
-                    {% if user.is_authenticated %}
-                        {% if user.id == post.author.id %}
-                        <span style="color: transparent;">__________________</span>
-                            <a class="nav-link" href="{% url 'update_post' post.pk %}">Editar</a>
-                            <a class="nav-link" href="{% url 'delete_post' post.pk %}">Deletar</a>
-                        {% endif %}
-                    {% endif %}
 
-                </small>
+            <li style="text-align: center;">
+                <span class="nav-link-static"><a class="nav-link" href="{% url 'article-detail' post.pk %}">{{ post.title }}</a> 
+                    <b style="padding: 0 2%;"> | </b> <a class="nav-link" href="{% url 'show_profile_page'  post.author.profile.id %}"> {{ post.author.first_name }}</a> <b style="padding: 0 2%;"> | </b>{{ post.post_date }}
+                    <b style="padding: 0 2%;"> | </b>
+                    <small >
+                        
+                        <a href="{% url 'article-detail' post.pk %}" class="nav-link">Ler Post</a>
+                            
+                        {% if user.is_authenticated %}  
+                            {% if user.id == post.author.id %}
+    
+                                <a class="nav-link" href="{% url 'update_post' post.pk %}">Editar</a>
+                                <a class="nav-link" href="{% url 'delete_post' post.pk %}">Deletar</a>
+   
+                            {% endif %}
+                        {% endif %}
+
+                    </small>
+                </span>
                 <hr style="margin: 1rem 0; color: var(--dark);opacity: 0.7;">
             </li>
 

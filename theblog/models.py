@@ -24,6 +24,7 @@ class Profile(models.Model):
     twitter_url = models.CharField(max_length=255, null=True, blank=True)
     instagram_url = models.CharField(max_length=255, null=True, blank=True)
     pintterest_url = models.CharField(max_length=255, null=True, blank=True)
+    github_url = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return str(self.user)
@@ -34,17 +35,17 @@ class Profile(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=255)
     header_image = models.ImageField(null=True, blank=True, upload_to='images/posts/')
-    title_tag = models.CharField(max_length=255, default='Blog')
+    title_tag = models.CharField(max_length=255)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = RichTextField(blank=True, null=True)
-    #body = models.TextField()
     post_date = models.DateField(auto_now_add=True)
-    category = models.CharField(max_length=255, default='Uncategorized')
+    category = models.CharField(max_length=255, default='Geral')
     snippet = models.CharField(max_length=255)
     likes = models.ManyToManyField(User, related_name='blog_posts')
 
     class Meta:
-        ordering = ['-author']
+        #ordering = ['-author']
+        ordering = ['-post_date']
 
     def total_likes(self):
         return self.likes.count()
@@ -69,3 +70,15 @@ class Comment(models.Model):
 
     def __str__(self):
         return '%s - %s' % (self.post.title, self.name)
+    
+
+class Contact(models.Model):
+    name =  models.CharField(max_length=255)
+    email = models.EmailField(max_length=255)
+    phone = models.CharField(max_length=255)
+    body = RichTextField(blank=True, null=True)
+    date_add = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return '%s - %s' % (self.name, self.email)
+    

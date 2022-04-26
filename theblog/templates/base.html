@@ -1,116 +1,117 @@
 <!doctype html>
+{% load static %}
 <html lang="en">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
     <title>{% block title %}{% endblock %}</title>
+
+    <!-- font awesome icons cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+
+    <!-- swiper slider css file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.5/swiper-bundle.min.css" integrity="sha512-m3pAvNriL711NMlhkZHK6K4Tu2/RjtrzyjxZU8mlAbxxoDoURy27KajN1LGTLeEEPvaN12mKAgSCrYEwF9y0jA==" crossorigin="anonymous" />
+
+    <!-- custom style.css file -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+ 
+ 
+    
+    <style>
+        #map_7f4745fc140f4a83b4524b894057108d {
+            position: relative;
+            width: 100.0%;
+            height: 100.0%;
+            left: 0.0%;
+            top: 0.0%;
+        }
+    </style>
+
   </head>
   <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="{% url 'home' %}">Blog</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-            {% if user.is_authenticated %}
-           
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'add_post' %}">Add Post</a>
-              </li>
-
-              <li class="nav-item dropdown">
-                <a class="nav-link active dropdown-toggle " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Profile
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">    
-                  <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Settings</a></li>
-                  {% if user.profile.id %}
-                    <li><a class="dropdown-item" href="{% url 'edit_profile_page' user.profile.id %}">Edit Profile</a></li>
-                  {% else %}
-                    <li><a class="dropdown-item" href="{% url 'create_profile_page' %}">Create Profile</a></li>
-                  {% endif %}
-
-                  {% if user.profile.id %}
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="{% url 'show_profile_page' user.profile.id %}">View Profile</a></li>           
-                  {% endif %}
-                </ul>
-              </li>
- 
-            {% endif %}
-            
-            {% if cat_menu %}
-            <li class="nav-item dropdown">
-              <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Categories
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                {% if user.is_authenticated %}
-                  <li><a class="dropdown-item" href="{% url 'add_category' %}">Add Category</a></li>
-                {% endif %}
-
-                <li><a class="dropdown-item" href="{% url 'category_list' %}">Category List</a></li>
-                
-                <li><hr class="dropdown-divider"></li>
-                
-                {% for item in cat_menu %}
-                  <a class="dropdown-item" href="{% url 'category' item|slugify  %}">{{ item }}</a>
-                {% endfor %}
-              {% endif %}
-              </ul>
-            </li>
-  
-            </ul>
-            {% if user.is_authenticated %}
-            <li class="d-flex">
-              <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout</a>
-            </li>
-            <form class="d-flex">
-              
-              <li style="list-style-type: none;">User: {{ user.username }}</li>
-            </form>
-
-            {% else %}
-
-            <li class="d-flex">
-              <a class="nav-link active" aria-current="page" href="{% url 'register' %}">Register</a>
-            </li>
-
-            <li class="d-flex">
-              <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Login</a>
-            </li>
-              
-            {% endif %}
-         
-            
-          </div>
-        </div>
-      </nav>
-    <br>
+    {% include 'header.html' %}
+      
+      <br>
+    
     <div class="container">
         {% block content %}
 
         {% endblock %}
     </div>
 
-    <!-- Optional JavaScript; choose one of the two! -->
+      <br>
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    {% include 'footer.html' %}
 
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    -->
+    <!-- masonry libray for horizontal grid -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js" integrity="sha512-JRlcvSZAXT8+5SQQAvklXGJuxXTouyq8oIMaYERZQasB8SBDHZaUbeASsJWpk0UUrf89DP3/aefPPrlMR1h1yQ==" crossorigin="anonymous"></script>
+
+    <!-- swiper slider cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.5/swiper-bundle.min.js" integrity="sha512-1LlEYE0qExJ/GUfAJ0k2K2fB5sIvMv/q6ueo3syohvQ3ElWDQVSMUOf39cxaDWHtNu7M6lF6ZC1H6A1m3SvheA==" crossorigin="anonymous"></script>
+
+    <!-- custom javascript main.js file -->
+    <script>
+      let toggle = document.querySelector("#header .toggle-button");
+      let collapse = document.querySelectorAll("#header .collapse");
+
+      toggle.addEventListener('click' , function(){
+          collapse.forEach(col => col.classList.toggle("collapse-toggle"));
+      })
+
+      // with masonry
+      new Masonry("#posts .grid", {
+          itemSelector : '.grid-item',
+          gutter : 20
+      });
+
+      // swiper libray initialization
+      new Swiper('.swiper-container', {
+          direction : 'horizontal',
+          loop : true,
+          slidesPerView : 5,
+          autoplay : {
+              delay : 3000
+          },
+          // responsive brakpoints
+          breakpoints : {
+              '@0' : {
+                  slidesPerView : 2
+              },
+              // 888px
+              '@1.00' : {
+                  slidesPerView : 3
+              },
+              // 1110px
+              '@1.25' : {
+                  slidesPerView : 4
+              },
+              // 1330px
+              '@1.50' : {
+                  slidesPerView: 5
+              }
+          }
+      })
+
+      // Sticky Navigation
+      window.onscroll = function(){ myFunction()};
+
+      // get the current value 
+      let navbar = document.getElementById("header");
+
+      // get the navbar position
+      let sticky = navbar.offsetTop;
+
+      // sticky function
+      function myFunction(){
+          if(window.pageYOffset >= sticky){
+              navbar.classList.add("sticky");
+          }else{
+              navbar.classList.remove("sticky");
+          }
+      }
+    </script>
   </body>
 </html>
